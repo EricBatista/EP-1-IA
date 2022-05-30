@@ -104,7 +104,7 @@ public class EP1IA {
                 randomList.add(newInd);
             }
 
-            //TODO: MUTACAO COM ROLETA
+            //MUTACAO COM ROLETA
             LinkedList<Ind> roulettemutation = new LinkedList<>();
             int numInd = 0;
             boolean roulette;
@@ -119,6 +119,7 @@ public class EP1IA {
                     }
                 }
                 Ind newInd = GeneticManipulation.mutation(listInd.get(m), 0.35);
+                newInd.calcFit(function.value(newInd.getValue(0),newInd.getValue(1)),numDelta);
                 roulettemutation.add(newInd);
                 numInd++;
                 if (numInd >= numPop / 10) {
