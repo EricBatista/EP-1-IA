@@ -75,7 +75,7 @@ public class EP1IA {
         }
         media = media / listInd.size();
 
-        GenCSV csv = new GenCSV("exec.csv");
+        GenCSV csv = new GenCSV("exec"+function.name()+"Gen"+numGeracoes+"Pop"+numPop+".csv");
         for (int i = 0; i < numGeracoes; i++) {
             //Crossover simples melhor com aleatórios
             LinkedList<Ind> crossSimples = new LinkedList<>();
