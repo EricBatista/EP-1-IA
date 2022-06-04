@@ -13,4 +13,9 @@ public class SumSFun implements Fun{
         return s;
 
     }
+
+    @Override
+    public String name() {
+        return "SumS";
+    }
 }
