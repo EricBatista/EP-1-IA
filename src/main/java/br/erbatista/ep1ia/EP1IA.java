@@ -25,8 +25,32 @@ public class EP1IA {
         BinManipulation.setMin(input.nextDouble());
         System.out.println("Insira o Delta");
         double numDelta = input.nextDouble();
-        //TODO: Select Function
-        Fun function = new AckleyFun();
+        System.out.println("Selecione o valor equivalente a função:\n1 - Gold\n2 - SumS\n3 - DeJong\n4 - Ackley\n5 - Bump\n6 - Rastringin");
+        int funcEntry = input.nextInt();
+        Fun function;
+        if (funcEntry == 1){
+            function = new GoldFun();
+        }
+        else if (funcEntry == 2){
+            function = new SumSFun();
+        }
+        else if (funcEntry == 3){
+            function = new DeJongFun();
+        }
+        else if (funcEntry == 4){
+            function = new AckleyFun();
+        }
+        else if (funcEntry == 5){
+            function = new BumpFun();
+        }
+        else if (funcEntry == 6){
+            function = new RastringinFun();
+        }
+        else {
+            function = new RastringinFun();
+            System.out.println("O valor inserido não é valido");
+            System.exit(0);
+        }
 
         //Gerando população
         System.out.println("Gerando População");
@@ -80,14 +104,35 @@ public class EP1IA {
                 randomList.add(newInd);
             }
 
-            //TODO: MUTACAO COM ROLETA
-
+            //MUTACAO COM ROLETA
+            LinkedList<Ind> roulettemutation = new LinkedList<>();
+            int numInd = 0;
+            boolean roulette;
+            int m;
+            double fitBestInd = listInd.getFirst().getFit();
+            for (int j = 0; j < numPop; j++) {
+                double nRoulette = rng.nextDouble(0, fitBestInd);
+                for (m = 0; m < numPop; m++) {
+                    double fit = listInd.get(m).getFit();
+                    if (fit <= nRoulette) {
+                        break;
+                    }
+                }
+                Ind newInd = GeneticManipulation.mutation(listInd.get(m), 0.35);
+                newInd.calcFit(function.value(newInd.getValue(0),newInd.getValue(1)),numDelta);
+                roulettemutation.add(newInd);
+                numInd++;
+                if (numInd >= numPop / 10) {
+                    break;
+                }
+            }
 
             //Concatenando
             listInd = crossSimples;
             listInd.addAll(crossUni);
             listInd.addAll(melhoresEPiores);
             listInd.addAll(randomList);
+            listInd.addAll(roulettemutation);
 
             Collections.sort(listInd);
             //listInd.forEach(s -> {System.out.println(s);});
