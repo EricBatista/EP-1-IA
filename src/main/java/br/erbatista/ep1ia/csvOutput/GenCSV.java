@@ -1,5 +1,6 @@
 package br.erbatista.ep1ia.csvOutput;
 
+import java.io.FileWriter;
 import java.util.LinkedList;
 //import com.opencsv.CSVWriter;
 import java.time.LocalDateTime;
@@ -11,23 +12,31 @@ import br.erbatista.ep1ia.math.functions.*;
 
 public class GenCSV {
 
-    //Writer writer = Files.newBufferedWriter("\\br.erbatista.ep1ia\csvOutput\{graph_title}_{date}.csv");
-    //CSVWriter csvWriter = new CSVWriter(writer);
-    public static final String date = LocalDateTime.now().toString();
+    private FileWriter fileWriter;
 
-    public static void main(String[] args) {
-        System.out.println(date);
+    public GenCSV(String filename){
+        try{
+            fileWriter = new FileWriter(filename);
+
+            fileWriter.write("Gen,med,best\n");
+        }catch (Exception e){
+            System.out.println("Erro ao gerar CSV");
+        }
     }
 
-    public void geraArquivo(){
-        //csvWriter.flush();
-        //writer.close();
-
-        //graph.savefig(f"results\\graphs\\{graph_title}_{date}.png")
+    public void write(int gen, double med, double best){
+        try {
+            fileWriter.write(gen+","+med+","+best+"\n");
+        }catch (Exception e){
+            System.out.println("Falha ao escrever linha no csv");
+        }
     }
 
-    public void addLinha(LinkedList<Ind> ListInd){
-        //csvWriter.writeAll(ListInd);
-        //csvWriter.writeNext();
+    public void close(){
+        try{
+            fileWriter.close();
+        }catch (Exception e){
+            System.out.println("Falha ao fechar o arquivo");
+        }
     }
 }
