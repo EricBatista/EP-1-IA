@@ -1,3 +1,11 @@
+/********************************************/
+/*******EP 1 - Inteligencia Artificial*******/
+/*************Algoritmo Genetico*************/
+/*******Eric Batista da Silva 10783114*******/
+/*****Matheus Amorim dos Santos 10882810*****/
+/**Vinícius Zacarias Lacerda Brito 10783198**/
+/********************************************/
+
 package br.erbatista.ep1ia;
 
 
