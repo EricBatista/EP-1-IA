@@ -65,7 +65,7 @@ public class EP1IA {
 
         //ordena lista
         Collections.sort(listInd);
-        listInd.forEach(s -> {System.out.println(s);});
+        listInd.forEach(System.out::println);
 
         //Calc Média
         double media = 0;
@@ -87,7 +87,7 @@ public class EP1IA {
             for (int j = 0; j < numPop/5; j++) {
                 Ind newInd = GeneticManipulation.uniformCross(listInd.get(0),listInd.get(rng.nextInt(1,listInd.size())));
                 newInd.calcFit(function.value(newInd.getValue(0),newInd.getValue(1)),numDelta);
-                crossSimples.add(newInd);
+                crossUni.add(newInd);
             }
             //50 melhores e 50 piores
             LinkedList<Ind> melhoresEPiores = new LinkedList<>();
@@ -110,9 +110,9 @@ public class EP1IA {
             boolean roulette;
             int m;
             double fitBestInd = listInd.getFirst().getFit();
-            for (int j = 0; j < numPop; j++) {
+            for (int j = 0; j < listInd.size(); j++) {
                 double nRoulette = rng.nextDouble(0, fitBestInd);
-                for (m = 0; m < numPop; m++) {
+                for (m = 0; m < listInd.size()-1; m++) {
                     double fit = listInd.get(m).getFit();
                     if (fit <= nRoulette) {
                         break;
@@ -122,7 +122,7 @@ public class EP1IA {
                 newInd.calcFit(function.value(newInd.getValue(0),newInd.getValue(1)),numDelta);
                 roulettemutation.add(newInd);
                 numInd++;
-                if (numInd >= numPop / 10) {
+                if (numInd >= numPop / 5) {
                     break;
                 }
             }
@@ -135,7 +135,6 @@ public class EP1IA {
             listInd.addAll(roulettemutation);
 
             Collections.sort(listInd);
-            //listInd.forEach(s -> {System.out.println(s);});
 
             //Calc Média
             media = 0;
@@ -145,8 +144,6 @@ public class EP1IA {
             media = media / listInd.size();
 
             System.out.println("FIM CICLO: " + i);
-
-            //if(listInd.get(0).getFit() == listInd.get(1).getFit()) break;
 
         }
 
