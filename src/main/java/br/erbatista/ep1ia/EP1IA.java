@@ -1,6 +1,7 @@
 package br.erbatista.ep1ia;
 
 
+import br.erbatista.ep1ia.csvOutput.GenCSV;
 import br.erbatista.ep1ia.ga.GeneticManipulation;
 import br.erbatista.ep1ia.ga.Ind;
 import br.erbatista.ep1ia.math.BinManipulation;
@@ -74,6 +75,7 @@ public class EP1IA {
         }
         media = media / listInd.size();
 
+        GenCSV csv = new GenCSV("exec"+function.name()+"Gen"+numGeracoes+"Pop"+numPop+".csv");
         for (int i = 0; i < numGeracoes; i++) {
             //Crossover simples melhor com aleatórios
             LinkedList<Ind> crossSimples = new LinkedList<>();
@@ -143,9 +145,13 @@ public class EP1IA {
             }
             media = media / listInd.size();
 
+            csv.write(i,media,listInd.get(0).getFit());
+
             System.out.println("FIM CICLO: " + i);
 
         }
+
+        csv.close();
 
         System.out.println("Resultado");
         System.out.println(listInd.get(0));

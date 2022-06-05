@@ -17,4 +17,9 @@ public class BumpFun implements Fun{
             return (-1 * Math.abs((temp0 - temp1) / temp2));
         }
     }
+
+    @Override
+    public String name() {
+        return "Bump";
+    }
 }

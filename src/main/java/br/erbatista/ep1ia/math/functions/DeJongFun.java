@@ -6,4 +6,9 @@ public class DeJongFun implements Fun{
         double ySquare = Math.pow(y,2);
         return 100*Math.pow(xSquare-ySquare,2)+Math.pow(1-xSquare,2);
     }
+
+    @Override
+    public String name() {
+        return "DeJong";
+    }
 }

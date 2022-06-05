@@ -19,4 +19,9 @@ public class AckleyFun implements Fun{
         return (-a*Math.exp(-b*Math.sqrt(1.0/n*s1))-Math.exp(1.0/n*s2)+a+Math.exp(1));
 
     }
+
+    @Override
+    public String name() {
+        return "Ackley";
+    }
 }

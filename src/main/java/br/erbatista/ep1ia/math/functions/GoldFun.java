@@ -6,4 +6,9 @@ public class GoldFun implements Fun{
         double b = 30+ Math.pow((double) 2*x - 3*y ,2) * (18-32*x+ Math.pow((double) 12*x,2) + 48*y - 36 * x * y + Math.pow((double) 27*y,2));
         return a*b;
     }
+
+    @Override
+    public String name() {
+        return "Gold";
+    }
 }
